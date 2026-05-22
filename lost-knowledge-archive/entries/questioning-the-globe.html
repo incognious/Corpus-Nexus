@@ -1,0 +1,678 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Questioning the Globe: Curvature, Distance, and Observation | Corpus Nexus</title>
+    <style>
+      :root {
+        --bg: #090a0d;
+        --panel: rgba(18, 20, 26, 0.86);
+        --panel-soft: rgba(28, 27, 23, 0.72);
+        --gold: #d9b76f;
+        --gold-bright: #f3d68d;
+        --text: #f7f2e7;
+        --muted: #b8b0a2;
+        --line: rgba(217, 183, 111, 0.24);
+        --blue: #6aa0c8;
+        --shadow: rgba(0, 0, 0, 0.42);
+      }
+
+      * {
+        box-sizing: border-box;
+      }
+
+      html {
+        scroll-behavior: smooth;
+      }
+
+      body {
+        margin: 0;
+        background:
+          radial-gradient(circle at 20% 10%, rgba(217, 183, 111, 0.14), transparent 22rem),
+          radial-gradient(circle at 80% 0%, rgba(106, 160, 200, 0.14), transparent 26rem),
+          linear-gradient(180deg, #07080b 0%, var(--bg) 45%, #11100d 100%);
+        color: var(--text);
+        font-family: Georgia, "Times New Roman", serif;
+      }
+
+      a {
+        color: inherit;
+      }
+
+      .site-header {
+        position: sticky;
+        top: 0;
+        z-index: 10;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 1rem;
+        padding: 1rem clamp(1rem, 4vw, 3rem);
+        border-bottom: 1px solid var(--line);
+        background: rgba(7, 8, 11, 0.86);
+        backdrop-filter: blur(14px);
+      }
+
+      .brand {
+        color: var(--gold-bright);
+        font: 700 1rem Arial, sans-serif;
+        letter-spacing: 0.18rem;
+        text-decoration: none;
+        text-transform: uppercase;
+      }
+
+      nav {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 0.75rem;
+      }
+
+      nav a {
+        color: var(--muted);
+        font: 700 0.82rem Arial, sans-serif;
+        text-decoration: none;
+        text-transform: uppercase;
+      }
+
+      nav a:hover {
+        color: var(--gold-bright);
+      }
+
+      main {
+        overflow: hidden;
+      }
+
+      /* Hero section: star field, horizon line, and primary entry point. */
+      .hero {
+        position: relative;
+        display: grid;
+        align-items: end;
+        min-height: 82vh;
+        padding: clamp(6rem, 12vw, 9rem) clamp(1rem, 5vw, 5rem) clamp(4rem, 7vw, 6rem);
+        isolation: isolate;
+      }
+
+      .hero::before {
+        content: "";
+        position: absolute;
+        inset: 0;
+        z-index: -2;
+        background:
+          radial-gradient(circle at 12% 18%, rgba(255, 255, 255, 0.85) 0 1px, transparent 1.5px),
+          radial-gradient(circle at 55% 14%, rgba(255, 255, 255, 0.75) 0 1px, transparent 1.5px),
+          radial-gradient(circle at 82% 28%, rgba(255, 255, 255, 0.7) 0 1px, transparent 1.5px),
+          radial-gradient(circle at 42% 38%, rgba(255, 255, 255, 0.55) 0 1px, transparent 1.5px),
+          linear-gradient(180deg, rgba(6, 8, 13, 0.16), rgba(6, 8, 13, 0.94) 72%),
+          repeating-linear-gradient(105deg, rgba(217, 183, 111, 0.08) 0 1px, transparent 1px 4.4rem);
+      }
+
+      .hero::after {
+        content: "";
+        position: absolute;
+        left: 50%;
+        bottom: 12%;
+        z-index: -1;
+        width: 130vw;
+        height: 28vw;
+        max-height: 18rem;
+        transform: translateX(-50%);
+        border-top: 2px solid rgba(217, 183, 111, 0.62);
+        border-radius: 50% 50% 0 0;
+        background: radial-gradient(ellipse at 50% 0%, rgba(217, 183, 111, 0.2), transparent 60%);
+      }
+
+      .hero-copy {
+        max-width: 62rem;
+      }
+
+      .eyebrow,
+      .section-label {
+        color: var(--gold);
+        font: 700 0.78rem Arial, sans-serif;
+        letter-spacing: 0.16rem;
+        text-transform: uppercase;
+      }
+
+      .evidence-badge {
+        display: inline-flex;
+        width: fit-content;
+        margin-top: 0.9rem;
+        padding: 0.55rem 0.75rem;
+        border: 1px solid rgba(217, 183, 111, 0.52);
+        border-radius: 999px;
+        background: rgba(217, 183, 111, 0.14);
+        color: var(--gold-bright);
+        font: 700 0.82rem Arial, sans-serif;
+      }
+
+      h1,
+      h2,
+      h3 {
+        color: var(--text);
+        line-height: 1.05;
+      }
+
+      h1 {
+        max-width: 56rem;
+        margin: 0.8rem 0 1rem;
+        font-size: clamp(3.5rem, 10vw, 8rem);
+        letter-spacing: 0;
+      }
+
+      .hero p {
+        max-width: 46rem;
+        color: var(--muted);
+        font-size: clamp(1.1rem, 2.3vw, 1.45rem);
+        line-height: 1.6;
+      }
+
+      .button {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        margin-top: 1.25rem;
+        padding: 0.9rem 1.15rem;
+        border: 1px solid rgba(217, 183, 111, 0.62);
+        border-radius: 8px;
+        background: rgba(217, 183, 111, 0.16);
+        color: var(--text);
+        font: 700 0.9rem Arial, sans-serif;
+        text-decoration: none;
+      }
+
+      .button:hover {
+        background: rgba(217, 183, 111, 0.25);
+      }
+
+      .page-section {
+        width: min(1120px, calc(100% - 2rem));
+        margin: 0 auto;
+        padding: 4rem 0;
+      }
+
+      .section-heading {
+        max-width: 52rem;
+        margin-bottom: 1.4rem;
+      }
+
+      .section-heading h2 {
+        margin: 0.35rem 0 0.6rem;
+        font-size: clamp(2rem, 5vw, 4rem);
+      }
+
+      .section-heading p,
+      .card p,
+      td,
+      li {
+        color: var(--muted);
+        line-height: 1.65;
+      }
+
+      .grid {
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 1rem;
+      }
+
+      .card {
+        padding: 1rem;
+        border: 1px solid var(--line);
+        border-radius: 8px;
+        background: var(--panel);
+        box-shadow: 0 1rem 2.5rem var(--shadow);
+      }
+
+      .card h3 {
+        margin: 0 0 0.6rem;
+        font-size: 1.35rem;
+      }
+
+      .table-wrap {
+        overflow-x: auto;
+        border: 1px solid var(--line);
+        border-radius: 8px;
+        background: var(--panel);
+      }
+
+      table {
+        width: 100%;
+        border-collapse: collapse;
+        min-width: 34rem;
+      }
+
+      th,
+      td {
+        padding: 0.9rem;
+        border-bottom: 1px solid var(--line);
+        text-align: left;
+      }
+
+      th {
+        color: var(--gold-bright);
+        background: rgba(217, 183, 111, 0.1);
+        font: 700 0.8rem Arial, sans-serif;
+        text-transform: uppercase;
+      }
+
+      tr:last-child td {
+        border-bottom: 0;
+      }
+
+      /* Calculator section: simple curvature estimate using hidden-distance approximations. */
+      .calculator {
+        display: grid;
+        grid-template-columns: minmax(0, 0.85fr) minmax(0, 1.15fr);
+        gap: 1rem;
+      }
+
+      .field {
+        display: grid;
+        gap: 0.4rem;
+        margin-bottom: 0.9rem;
+      }
+
+      label {
+        color: var(--gold);
+        font: 700 0.78rem Arial, sans-serif;
+        text-transform: uppercase;
+      }
+
+      input {
+        width: 100%;
+        padding: 0.9rem;
+        border: 1px solid var(--line);
+        border-radius: 8px;
+        background: rgba(5, 6, 8, 0.82);
+        color: var(--text);
+        font: 1rem Arial, sans-serif;
+      }
+
+      .result {
+        display: grid;
+        gap: 0.75rem;
+        align-content: start;
+      }
+
+      .result strong {
+        color: var(--gold-bright);
+        font-size: clamp(1.6rem, 4vw, 2.5rem);
+      }
+
+      .note {
+        border-left: 3px solid var(--gold);
+        padding-left: 1rem;
+        color: var(--muted);
+      }
+
+      .comparison {
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 1rem;
+      }
+
+      .comparison .card:first-child {
+        border-color: rgba(217, 183, 111, 0.38);
+      }
+
+      .comparison .card:last-child {
+        border-color: rgba(106, 160, 200, 0.38);
+      }
+
+      /* Diagrams are CSS-built so the page stays self-contained. */
+      .diagram-row {
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 1rem;
+      }
+
+      .diagram {
+        position: relative;
+        min-height: 18rem;
+        overflow: hidden;
+        border: 1px solid var(--line);
+        border-radius: 8px;
+        background:
+          linear-gradient(180deg, rgba(106, 160, 200, 0.12), transparent 45%),
+          rgba(9, 10, 13, 0.88);
+      }
+
+      .diagram h3 {
+        position: relative;
+        z-index: 2;
+        margin: 1rem;
+      }
+
+      .diagram p {
+        position: relative;
+        z-index: 2;
+        max-width: 20rem;
+        margin: 0 1rem;
+        color: var(--muted);
+        line-height: 1.5;
+      }
+
+      .perspective .ground {
+        position: absolute;
+        left: 10%;
+        right: 10%;
+        bottom: 24%;
+        height: 2px;
+        background: var(--gold);
+      }
+
+      .perspective .rails {
+        position: absolute;
+        left: 18%;
+        right: 18%;
+        bottom: 24%;
+        height: 9rem;
+        clip-path: polygon(0 100%, 45% 0, 55% 0, 100% 100%);
+        border-left: 2px solid rgba(217, 183, 111, 0.8);
+        border-right: 2px solid rgba(217, 183, 111, 0.8);
+      }
+
+      .perspective .object,
+      .globe .object {
+        position: absolute;
+        width: 2rem;
+        height: 5rem;
+        border-radius: 6px 6px 0 0;
+        background: linear-gradient(180deg, var(--gold-bright), #8e6d32);
+      }
+
+      .perspective .object {
+        right: 18%;
+        bottom: 24%;
+        transform: scale(0.55);
+        transform-origin: bottom;
+      }
+
+      .globe .curve {
+        position: absolute;
+        left: -10%;
+        right: -10%;
+        bottom: -22%;
+        height: 15rem;
+        border-top: 3px solid var(--gold);
+        border-radius: 50% 50% 0 0;
+      }
+
+      .globe .object {
+        right: 22%;
+        bottom: 28%;
+      }
+
+      .globe .mask {
+        position: absolute;
+        right: 19%;
+        bottom: 13%;
+        width: 6rem;
+        height: 4rem;
+        background: #090a0d;
+        border-top: 2px solid rgba(217, 183, 111, 0.62);
+      }
+
+      .question-list {
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 0.8rem;
+        padding: 0;
+        list-style: none;
+      }
+
+      .question-list li {
+        padding: 1rem;
+        border: 1px solid var(--line);
+        border-radius: 8px;
+        background: var(--panel-soft);
+      }
+
+      .final {
+        margin-bottom: 4rem;
+        padding: clamp(2rem, 6vw, 4rem);
+        border: 1px solid rgba(217, 183, 111, 0.34);
+        border-radius: 8px;
+        background:
+          radial-gradient(circle at 90% 10%, rgba(217, 183, 111, 0.16), transparent 18rem),
+          var(--panel);
+      }
+
+      @media (max-width: 760px) {
+        .site-header,
+        nav,
+        .grid,
+        .calculator,
+        .comparison,
+        .diagram-row,
+        .question-list {
+          grid-template-columns: 1fr;
+        }
+
+        .site-header {
+          align-items: flex-start;
+          flex-direction: column;
+        }
+
+        .hero {
+          min-height: 70vh;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <header class="site-header">
+      <a class="brand" href="../index.html">Corpus Nexus</a>
+      <nav aria-label="Primary navigation">
+        <a href="../archive.html">Archive</a>
+        <a href="../web.html">Topic Web</a>
+        <a href="../glossary.html">Glossary</a>
+        <a href="../evidence-scale.html">Evidence Scale</a>
+        <a href="../teachings.html">Teachings</a>
+        <a href="../gnostic-afterlife-plan.html">Afterlife Plan</a>
+        <a href="../to-ascend.html">To Ascend</a>
+        <a href="../watch.html">Watch</a>
+        <a href="../submit.html">Submit</a>
+        <a href="../about.html">About</a>
+      </nav>
+    </header>
+
+    <main>
+      <!-- Hero Section -->
+      <section class="hero">
+        <div class="hero-copy">
+          <p class="eyebrow">Curvature, Distance, and Observation</p>
+          <h1>Questioning the Globe</h1>
+          <p>A visual look at Earth curvature, distance, perspective, and long-range observations.</p>
+          <span class="evidence-badge">Evidence: Level 03 - Disputed</span>
+          <a class="button" href="#curvature">Explore the Curvature Question</a>
+        </div>
+      </section>
+
+      <!-- Curvature Per Mile Section -->
+      <section class="page-section" id="curvature">
+        <div class="section-heading">
+          <p class="section-label">Curvature Per Mile</p>
+          <h2>The common 8 inches per mile squared formula.</h2>
+          <p>One common simplified calculation says the curve drop is approximately 8 inches times the distance in miles squared. This is a tangent-based shortcut used in many debates, but it does not include observer height, atmospheric refraction, elevation, camera zoom, or terrain.</p>
+        </div>
+        <div class="grid">
+          <div class="card">
+            <h3>Example Calculation</h3>
+            <p>1 mile is about 8 inches of drop. 2 miles is about 32 inches. 3 miles is about 72 inches. 10 miles is about 666 inches, or about 55.5 feet.</p>
+            <p class="note">The exact globe geometry is more detailed. This page uses simplified estimates so the assumptions are visible.</p>
+          </div>
+          <div class="table-wrap">
+            <table>
+              <thead>
+                <tr>
+                  <th>Distance in miles</th>
+                  <th>Expected curve drop</th>
+                  <th>Feet</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr><td>1</td><td>8 inches</td><td>0.67 ft</td></tr>
+                <tr><td>2</td><td>32 inches</td><td>2.67 ft</td></tr>
+                <tr><td>3</td><td>72 inches</td><td>6 ft</td></tr>
+                <tr><td>5</td><td>200 inches</td><td>16.67 ft</td></tr>
+                <tr><td>10</td><td>666 inches</td><td>55.5 ft</td></tr>
+                <tr><td>20</td><td>3,200 inches</td><td>266.67 ft</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </section>
+
+      <!-- Interactive Curvature Calculator -->
+      <section class="page-section">
+        <div class="section-heading">
+          <p class="section-label">Interactive Calculator</p>
+          <h2>Estimate hidden height behind the curve.</h2>
+          <p>Enter a distance, observer height, and target height. This simple model subtracts the visible horizon distance created by observer and target height, then applies an 8 inches per mile squared drop to any remaining distance.</p>
+        </div>
+        <div class="calculator">
+          <div class="card">
+            <div class="field">
+              <label for="distance">Distance in miles</label>
+              <input id="distance" type="number" value="10" min="0" step="0.1">
+            </div>
+            <div class="field">
+              <label for="observer">Observer height in feet</label>
+              <input id="observer" type="number" value="6" min="0" step="0.1">
+            </div>
+            <div class="field">
+              <label for="target">Target height in feet</label>
+              <input id="target" type="number" value="100" min="0" step="0.1">
+            </div>
+          </div>
+          <div class="card result" aria-live="polite">
+            <h3>Estimated Result</h3>
+            <p>Approximate hidden amount:</p>
+            <strong id="hiddenResult">0 ft</strong>
+            <p id="visibilityResult">The target should be visible in this simplified model.</p>
+            <p class="note">This estimate does not model refraction, waves, lens compression, exact elevation, weather, or terrain. It is a debate tool, not a surveying instrument.</p>
+          </div>
+        </div>
+      </section>
+
+      <!-- Long-Distance Visibility Section -->
+      <section class="page-section">
+        <div class="section-heading">
+          <p class="section-label">Long-Distance Visibility</p>
+          <h2>If Earth curves, why can some distant objects still be seen?</h2>
+          <p>People often debate ships visible at long distance, city skylines across water, mountains seen from far away, and lake or ocean horizon observations.</p>
+        </div>
+        <div class="comparison">
+          <div class="card">
+            <h3>Claimed Problem</h3>
+            <p>Objects are visible too far away. Critics argue that a globe model predicts more hidden height than the observation appears to show.</p>
+          </div>
+          <div class="card">
+            <h3>Mainstream Explanation</h3>
+            <p>Elevation, refraction, camera zoom, lens effects, atmospheric conditions, and exact observer height can affect visibility and apparent horizon behavior.</p>
+          </div>
+        </div>
+      </section>
+
+      <!-- Water Level Question -->
+      <section class="page-section">
+        <div class="section-heading">
+          <p class="section-label">Water Level Question</p>
+          <h2>Does Water Curve?</h2>
+          <p>Large bodies of water appear flat to the human eye, which raises a visual and philosophical question: why does water always seek level, and how should level be defined on a spherical Earth?</p>
+        </div>
+        <div class="grid">
+          <div class="card">
+            <h3>Questions Raised</h3>
+            <p>What would curvature look like across lakes, oceans, and canals? How large must the distance be before curvature is visible? What measurements would separate visual flatness from geometric flatness?</p>
+          </div>
+          <div class="card">
+            <h3>Mainstream Explanation</h3>
+            <p>On a globe, level means perpendicular to gravity at each local point. Under this explanation, the surface can be curved globally while still being locally level to an observer.</p>
+          </div>
+        </div>
+      </section>
+
+      <!-- Perspective vs. Curvature Section -->
+      <section class="page-section">
+        <div class="section-heading">
+          <p class="section-label">Perspective vs. Curvature</p>
+          <h2>Two explanations for bottom-up disappearance.</h2>
+          <p>One debate asks whether distant objects vanish from the bottom up because of perspective alone, curvature alone, or a combination of optics, geometry, and atmosphere.</p>
+        </div>
+        <div class="diagram-row">
+          <div class="diagram perspective">
+            <h3>Perspective Model</h3>
+            <p>Parallel lines visually converge toward the horizon. The question is whether apparent convergence can hide lower portions of objects.</p>
+            <span class="ground"></span>
+            <span class="rails"></span>
+            <span class="object"></span>
+          </div>
+          <div class="diagram globe">
+            <h3>Globe Curvature Model</h3>
+            <p>A curved surface blocks the lower portion of distant objects after accounting for observer and target height.</p>
+            <span class="curve"></span>
+            <span class="object"></span>
+            <span class="mask"></span>
+          </div>
+        </div>
+      </section>
+
+      <!-- Questions to Consider -->
+      <section class="page-section">
+        <div class="section-heading">
+          <p class="section-label">Questions to Consider</p>
+          <h2>What would count as a strong test?</h2>
+        </div>
+        <ul class="question-list">
+          <li>How much curvature should be visible over 5, 10, or 20 miles?</li>
+          <li>How much does observer height change the result?</li>
+          <li>How much does atmospheric refraction affect visibility?</li>
+          <li>Can camera zoom restore objects that are hidden by curvature?</li>
+          <li>What observations would clearly prove or disprove the model?</li>
+          <li>What details must be recorded: distance, elevation, lens, weather, pressure, humidity, and exact target height?</li>
+        </ul>
+      </section>
+
+      <!-- Final Section -->
+      <section class="page-section final">
+        <p class="section-label">Research, Test, Compare</p>
+        <h2>Research, Test, Compare</h2>
+        <p>The goal is not to blindly accept or reject a model, but to test claims carefully, compare measurements, and understand the assumptions behind each calculation.</p>
+      </section>
+    </main>
+
+    <script>
+      // Calculator logic: simple hidden-height estimate using the 8 inches per mile squared shortcut.
+      const distanceInput = document.querySelector("#distance");
+      const observerInput = document.querySelector("#observer");
+      const targetInput = document.querySelector("#target");
+      const hiddenResult = document.querySelector("#hiddenResult");
+      const visibilityResult = document.querySelector("#visibilityResult");
+
+      const horizonMiles = (heightFeet) => Math.sqrt(Math.max(heightFeet, 0) / 0.6667);
+
+      function updateCalculator() {
+        const distance = Number(distanceInput.value) || 0;
+        const observerHeight = Number(observerInput.value) || 0;
+        const targetHeight = Number(targetInput.value) || 0;
+        const visibleDistance = horizonMiles(observerHeight) + horizonMiles(targetHeight);
+        const beyondHorizon = Math.max(distance - visibleDistance, 0);
+        const hiddenFeet = 0.6667 * beyondHorizon * beyondHorizon;
+        const remainingFeet = Math.max(targetHeight - hiddenFeet, 0);
+
+        hiddenResult.textContent = `${hiddenFeet.toFixed(2)} ft`;
+        visibilityResult.textContent = hiddenFeet <= 0
+          ? "The target should be visible in this simplified model."
+          : `${remainingFeet.toFixed(2)} ft of the target remains above the estimated curve block.`;
+      }
+
+      [distanceInput, observerInput, targetInput].forEach((input) => {
+        input.addEventListener("input", updateCalculator);
+      });
+
+      updateCalculator();
+    </script>
+  </body>
+</html>

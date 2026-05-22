@@ -1,0 +1,75 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Suggest a Fragment | Corpus Nexus</title>
+    <meta name="description" content="Suggest a new fragment for the Corpus Nexus archive.">
+    <link rel="stylesheet" href="assets/styles.css">
+  </head>
+  <body>
+    <header class="site-header">
+      <a class="brand" href="index.html">Corpus Nexus</a>
+      <nav aria-label="Primary navigation">
+        <a href="archive.html">Archive</a>
+        <a href="web.html">Topic Web</a>
+        <a href="glossary.html">Glossary</a>
+        <a href="evidence-scale.html">Evidence Scale</a>
+        <a href="teachings.html">Teachings</a>
+        <a href="gnostic-afterlife-plan.html">Afterlife Plan</a>
+        <a href="to-ascend.html">To Ascend</a>
+        <a href="watch.html">Watch</a>
+        <a aria-current="page" href="submit.html">Submit</a>
+        <a href="about.html">About</a>
+      </nav>
+    </header>
+
+    <main class="page-shell text-page">
+      <section class="page-title">
+        <p class="section-label">Suggest a Fragment</p>
+        <h1>Add a trail to the archive.</h1>
+        <p>Use this form to suggest a topic, source, theory, artifact, book, person, or strange historical thread for Corpus Nexus.</p>
+      </section>
+
+      <form class="archive-form" name="fragment-suggestion" method="POST" data-netlify="true" action="thanks.html">
+        <input type="hidden" name="form-name" value="fragment-suggestion">
+        <label>
+          Your name
+          <input type="text" name="name" autocomplete="name">
+        </label>
+        <label>
+          Email
+          <input type="email" name="email" autocomplete="email">
+        </label>
+        <label>
+          Fragment title
+          <input type="text" name="title" required placeholder="Example: The Ethiopian Bible">
+        </label>
+        <label>
+          Shelf
+          <select name="shelf" required>
+            <option value="">Choose a shelf</option>
+            <option>Forbidden Texts</option>
+            <option>Lost Technologies</option>
+            <option>Hidden Traditions</option>
+            <option>Lost Civilizations</option>
+            <option>Mysteries & Anomalies</option>
+          </select>
+        </label>
+        <label>
+          What should the archive investigate?
+          <textarea name="body" required rows="7" placeholder="Add the story, question, source links, names, dates, or why this belongs in Corpus Nexus."></textarea>
+        </label>
+        <label>
+          Source link
+          <input type="url" name="source" placeholder="https://">
+        </label>
+        <button class="button primary" type="submit">Send Fragment</button>
+      </form>
+    </main>
+
+    <footer class="site-footer">
+      <p>Submissions will appear inside Netlify once this site is hosted there with form detection enabled.</p>
+    </footer>
+  </body>
+</html>
