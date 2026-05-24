@@ -6,6 +6,55 @@
     <title>The Gnostic Afterlife Plan | Corpus Nexus</title>
     <meta name="description" content="A Christ-centered Gnostic afterlife passage page exploring archons, gnosis, self-knowledge, and the return to the Pleroma.">
     <link rel="stylesheet" href="assets/styles.css">
+    <style>
+      .term-cloud {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 0.55rem;
+        margin: 1rem 0 2rem;
+      }
+
+      .term {
+        position: relative;
+        display: inline-flex;
+        align-items: center;
+        min-height: 2.1rem;
+        border-bottom: 1px dotted rgba(215, 196, 154, 0.72);
+        color: var(--paper-bright);
+        font-weight: 700;
+        cursor: help;
+      }
+
+      .term-cloud .term {
+        padding: 0.35rem 0.7rem;
+        border: 1px solid rgba(191, 120, 69, 0.45);
+        border-radius: 999px;
+        background: rgba(191, 120, 69, 0.11);
+        font: 700 0.88rem Arial, sans-serif;
+      }
+
+      .term::after {
+        position: absolute;
+        left: 0;
+        bottom: calc(100% + 0.55rem);
+        z-index: 20;
+        display: none;
+        width: min(18rem, 72vw);
+        padding: 0.75rem;
+        border: 1px solid rgba(191, 120, 69, 0.58);
+        border-radius: 8px;
+        color: var(--paper-bright);
+        background: rgba(11, 12, 14, 0.96);
+        box-shadow: 0 1rem 2.2rem rgba(0, 0, 0, 0.32);
+        content: attr(data-definition);
+        font: 400 0.88rem/1.45 Arial, sans-serif;
+      }
+
+      .term:hover::after,
+      .term:focus::after {
+        display: block;
+      }
+    </style>
   </head>
   <body>
     <header class="site-header">
