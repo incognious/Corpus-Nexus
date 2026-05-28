@@ -1,0 +1,210 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Threshold | Corpus Nexus</title>
+    <meta name="description" content="A private welcome threshold for Corpus Nexus, the archive of hidden, disputed, and forgotten knowledge.">
+    <link rel="stylesheet" href="assets/styles.css">
+    <style>
+      body.threshold-page {
+        min-height: 100vh;
+        background:
+          linear-gradient(180deg, rgba(7, 8, 10, 0.3), rgba(7, 8, 10, 0.84)),
+          radial-gradient(circle at 16% 24%, rgba(191, 120, 69, 0.16), transparent 22rem),
+          radial-gradient(circle at 86% 18%, rgba(215, 196, 154, 0.08), transparent 20rem),
+          #101113;
+      }
+
+      .threshold-hero {
+        position: relative;
+        min-height: 100vh;
+        display: grid;
+        place-items: center;
+        overflow: hidden;
+        padding: 2rem 1rem;
+      }
+
+      .threshold-hero::before {
+        position: absolute;
+        inset: 0;
+        background:
+          linear-gradient(90deg, rgba(10, 10, 12, 0.9), rgba(10, 10, 12, 0.58), rgba(10, 10, 12, 0.88)),
+          url("assets/archive-hero.png") center / cover;
+        content: "";
+        opacity: 0.74;
+      }
+
+      .threshold-hero::after {
+        position: absolute;
+        inset: 1rem;
+        border: 1px solid rgba(242, 232, 204, 0.14);
+        content: "";
+        pointer-events: none;
+      }
+
+      .threshold-panel {
+        position: relative;
+        width: min(58rem, 100%);
+        padding: clamp(1.5rem, 5vw, 4rem);
+        border: 1px solid rgba(242, 232, 204, 0.18);
+        border-radius: 8px;
+        background:
+          linear-gradient(135deg, rgba(16, 17, 19, 0.9), rgba(16, 17, 19, 0.68)),
+          rgba(16, 17, 19, 0.72);
+        box-shadow: 0 2rem 5rem rgba(0, 0, 0, 0.42);
+        backdrop-filter: blur(12px);
+      }
+
+      .threshold-mark {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.6rem;
+        margin-bottom: 1.25rem;
+        color: var(--copper);
+        font: 700 0.78rem Arial, sans-serif;
+        letter-spacing: 0.08rem;
+        text-transform: uppercase;
+      }
+
+      .threshold-mark::before {
+        width: 2.4rem;
+        height: 1px;
+        background: var(--copper);
+        content: "";
+      }
+
+      .threshold-panel h1 {
+        max-width: 11ch;
+        font-size: clamp(3.2rem, 10vw, 7rem);
+      }
+
+      .threshold-lede {
+        max-width: 46rem;
+        margin: 1.25rem 0 0;
+        color: #e5dac0;
+        font-size: clamp(1.08rem, 2vw, 1.35rem);
+        line-height: 1.65;
+      }
+
+      .threshold-note {
+        display: grid;
+        gap: 0.85rem;
+        margin: 2rem 0;
+        padding: 1.15rem;
+        border-left: 3px solid var(--copper);
+        background: rgba(0, 0, 0, 0.24);
+      }
+
+      .threshold-note p {
+        margin: 0;
+        color: var(--muted);
+        font-size: 1rem;
+        line-height: 1.7;
+      }
+
+      .threshold-paths {
+        display: grid;
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        gap: 0.8rem;
+        margin: 2rem 0;
+      }
+
+      .threshold-path {
+        min-height: 9.5rem;
+        padding: 1rem;
+        border: 1px solid rgba(242, 232, 204, 0.16);
+        border-radius: 8px;
+        background: rgba(16, 17, 19, 0.58);
+      }
+
+      .threshold-path span {
+        color: var(--copper);
+        font: 700 0.72rem Arial, sans-serif;
+        letter-spacing: 0.08rem;
+        text-transform: uppercase;
+      }
+
+      .threshold-path h2 {
+        margin: 0.55rem 0;
+        color: var(--paper-bright);
+        font-size: 1.2rem;
+        line-height: 1.15;
+      }
+
+      .threshold-path p {
+        margin: 0;
+        color: var(--muted);
+        font: 0.95rem/1.55 Arial, sans-serif;
+      }
+
+      .threshold-actions {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 0.8rem;
+        margin-top: 2rem;
+      }
+
+      .threshold-small {
+        margin: 1.25rem 0 0;
+        color: rgba(215, 196, 154, 0.72);
+        font: 0.88rem/1.6 Arial, sans-serif;
+      }
+
+      @media (max-width: 760px) {
+        .threshold-hero {
+          place-items: start center;
+          padding-top: 4rem;
+        }
+
+        .threshold-hero::after {
+          inset: 0.5rem;
+        }
+
+        .threshold-paths {
+          grid-template-columns: 1fr;
+        }
+      }
+    </style>
+  </head>
+  <body class="threshold-page">
+    <main class="threshold-hero" aria-labelledby="threshold-title">
+      <section class="threshold-panel">
+        <p class="threshold-mark">Private Entrance</p>
+        <h1 id="threshold-title">Threshold</h1>
+        <p class="threshold-lede">Welcome to Corpus Nexus: a living archive for lost records, disputed histories, hidden traditions, strange sciences, forbidden texts, and the questions that survive when certainty gets too comfortable.</p>
+
+        <div class="threshold-note" aria-label="Welcome note">
+          <p>This page is a quiet doorway into the project. It is not listed in the main navigation, so it can be shared as a personal invitation before someone enters the full archive.</p>
+          <p>The purpose is not to force belief. The purpose is to gather fragments, compare claims, preserve sources, and keep the deeper questions open without losing the trail of evidence.</p>
+        </div>
+
+        <div class="threshold-paths" aria-label="How to begin">
+          <article class="threshold-path">
+            <span>First</span>
+            <h2>Enter Slowly</h2>
+            <p>Begin with one topic, follow its sources, and notice which symbols, stories, and questions repeat across the archive.</p>
+          </article>
+          <article class="threshold-path">
+            <span>Second</span>
+            <h2>Compare Carefully</h2>
+            <p>Separate documented history, spiritual interpretation, anomaly research, and speculation before drawing conclusions.</p>
+          </article>
+          <article class="threshold-path">
+            <span>Third</span>
+            <h2>Follow the Web</h2>
+            <p>Use the Topic Web to see how scripture, old-world architecture, cosmology, technology, and symbolism connect.</p>
+          </article>
+        </div>
+
+        <div class="threshold-actions">
+          <a class="button primary" href="index.html">Enter Corpus Nexus</a>
+          <a class="button ghost" href="archive.html">Open the Archive</a>
+          <a class="button ghost" href="web.html">View the Topic Web</a>
+        </div>
+
+        <p class="threshold-small">Shared by direct link only. Built as a welcome threshold, not a public navigation tab.</p>
+      </section>
+    </main>
+  </body>
+</html>
